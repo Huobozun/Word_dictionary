@@ -4,19 +4,7 @@ import string
 import operator
 import os
 
-def get_filelist(dir):#依次遍历.json文件
- 
-    Filelist = []
- 
-    for home, dirs, files in os.walk(path):
- 
-        for filename in files:
- 
-            # 文件名列表，包含完整路径
-            #Filelist.append(os.path.join(home, filename))
-            # # 文件名列表，只包含文件名
-            Filelist.append( filename)
-    return Filelist
+path=os.getcwd()
 
 
 def cleanText(input):
@@ -54,8 +42,8 @@ def getNgrams(output,input, n):
 
 
 if __name__=='__main__':
-    path='/home/zjg/code3.31/sampm10years/'
-    Filelist=get_filelist(dir)
+    path1=path+'/sampm10years/'
+    Filelist=os.listdir(path1)
     #方法一：对网页直接进行读取
     #content = urllib2.urlopen(urllib2.Request("http://pythonscraping.com/files/inaugurationSpeech.txt")).read()
     #方法二：对本地文件的读取，测试时候用，因为无需联网
@@ -64,7 +52,7 @@ if __name__=='__main__':
     output = {} # 构造字典
     for i0 in range(0,len(Filelist)):
         print(i0,Filelist[i0])
-        content = open('/home/zjg/code3.31/sampm10years/'+Filelist[i0]).read()
+        content = open(path+'/sampm10years/'+Filelist[i0]).read()
         ngrams = getNgrams(output,content, 3)
         sortedNGrams = sorted(ngrams.items(), key = operator.itemgetter(1), reverse=True) #=True 降序排列
         output=ngrams
